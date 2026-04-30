@@ -87,7 +87,6 @@ def atualiza_pop(populacao):
 # ---------------- Execução ----------------
 populacao = criar_populacao()
 
-# Inicializar G_BEST com o melhor da população inicial
 melhor_inicial = min(populacao, key=lambda ind: fitness(ind.Pos[0], ind.Pos[1]))
 G_BEST = melhor_inicial.Pos.copy()
 
@@ -95,7 +94,6 @@ for iteracao in range(GENERATIONS):
     atualiza_pop(populacao)
     GEN_ATUAL += 1
 
-# Debug: print da população
 print("População criada:")
 for ind in populacao:
     print(ind)
