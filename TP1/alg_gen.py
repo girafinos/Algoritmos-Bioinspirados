@@ -47,7 +47,7 @@ def ler_matriz_distancias(caminho_arquivo):
 
     return matriz
 
-MATRIZ_DISTANCIAS = ler_matriz_distancias("matriz_distancias.txt")
+MATRIZ_DISTANCIAS = ler_matriz_distancias("sgb128_dist.txt")
 N_CIDADES = len(MATRIZ_DISTANCIAS)
 
 os.makedirs("resultados", exist_ok=True)
