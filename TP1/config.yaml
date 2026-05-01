@@ -1,0 +1,13 @@
+# Configurações para o algoritmo genético do Caixeiro Viajante
+
+grid_search:
+  enabled: true
+  parameters:
+    - name: CROSSOVER_OPERATOR
+      values: ["OX", "PMX"]
+    - name: MUTATION_RATE
+      values: [0.1, 0.2, 0.3]
+    - name: GENERATIONS
+      values: [100, 200, 300]
+    - name: POP_SIZE
+      values: [20, 50, 100]
