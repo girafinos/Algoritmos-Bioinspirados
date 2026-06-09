@@ -1,8 +1,10 @@
 """
------------------------------------------------------------------------------------
-Authors: Felipe Girardi Siqueira, Lucas Daniel Lana Maciel, Gabriel Vaz Bernardini
-Algoritmo Evolução Diferencial
------------------------------------------------------------------------------------
+AG + ILS Híbrido para VRPTW
+Estratégia:
+  - Múltiplos inícios independentes (ILS) com perturbação greedy
+  - Busca local intensa em cada início (2-opt + or-opt)
+  - AG usa um conjunto elite de soluções para cruzamento RBX
+  - O código foi refatorado com nomes e comentários em português
 """
 
 import os
@@ -14,13 +16,13 @@ import numpy as np
 
 # parâmetros globais de configuração
 SEED = 42
-ELITE_SIZE = 12
+ELITE_SIZE = 10
 LS_FRAC = 0.50
-N_REMOVE_PERTURB = 20
+N_REMOVE_PERTURB = 3
 PRESERVE_RATE = 0.45
 SHUFFLE_FACTOR_MIN = 0.0
 SHUFFLE_FACTOR_MAX = 1.5
-SEG_SIZES = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+SEG_SIZES = (1, 2, 3)
 
 # ─────────────────────────────────────────────────────────────────
 # 1. LEITURA DE INSTÂNCIA
@@ -569,8 +571,8 @@ def salvar_saida(nome_instancia, algoritmo, conteudo, diretorio_saida="."):
 
 def main():
     # ════════════════════════════════════
-    AUTHORS        = "Autor A e Autor B"  # <- nomes do grupo
-    ALGORITHM_NAME = "AG"
+    AUTHORS        = "Felipe, Gabriel, Lucas"  
+    ALGORITHM_NAME = "Hybrid ILS+AG"
     TIME_LIMIT     = 450   # 8 min - 30s de margem
     OUTPUT_DIR     = "."
     # ════════════════════════════════════
@@ -593,16 +595,24 @@ def main():
 
     for caminho in sys.argv[1:]:
         print(f"\n{'=' * 55}\nInstância: {caminho}\n{'=' * 55}")
+        tempo_inicio_instancia = time.time()
         nome_instancia, capacidade, clientes = ler_instancia(caminho)
         dist = construir_distancias(clientes)
+        tempo_preparo = time.time() - tempo_inicio_instancia
+        
+        # Adjust time limit to account for file reading and distance calculation
+        limite_tempo_ajustado = max(10, TIME_LIMIT - tempo_preparo)
 
         rotas, nv, td, tempo_total, historico = executar(
             clientes, capacidade, dist,
             elite_size=ELITE_SIZE,
             frac_busca_local=LS_FRAC,
             n_remover_perturb=N_REMOVE_PERTURB,
-            limite_tempo=TIME_LIMIT,
+            limite_tempo=limite_tempo_ajustado,
         )
+        
+        # Add file reading time to total execution time
+        tempo_total += tempo_preparo
 
         viavel = rotas_viaveis(rotas, clientes, capacidade, dist)
 
