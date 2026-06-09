@@ -1,0 +1,60 @@
+POP_SIZE = 50
+ITERACOES = 150
+
+ALPHA = 0.9  
+BETA = 0.9 
+RHO = 0.4
+FEROMONIO_INICIAL = 0.001
+Q = 10.0
+SEMENTE = 1
+TAU_MIN = 1e-4
+TAU_MAX = 100.0
+PATIENCE = 70
+PESO_VEICULOS = 70.0
+PESO_DISTANCIA = 1.0
+
+Número de veículos: 20
+Distância total: 2932.5249
+Melhor encontrado na geração: 89 | tempo: 116.27s
+
+=======================================================
+
+POP_SIZE = 50
+ITERACOES = 150
+ALPHA = 2.0  
+BETA = 3.0 
+RHO = 0.4
+FEROMONIO_INICIAL = 0.001
+Q = 10.0
+SEMENTE = 1
+TAU_MIN = 1e-4
+TAU_MAX = 100.0
+PATIENCE = 50
+PESO_VEICULOS = 70.0
+PESO_DISTANCIA = 1.0
+
+Melhor solução global:
+Número de veículos: 20
+Distância total: 2958.5147
+Melhor encontrado na geração: 16 | tempo: 21.56s
+
+========================================================
+
+POP_SIZE = 50
+ITERACOES = 150
+ALPHA = 2.0  
+BETA = 2.0 
+RHO = 0.4
+FEROMONIO_INICIAL = 0.001
+Q = 10.0
+SEMENTE = 1
+TAU_MIN = 1e-4
+TAU_MAX = 50.0
+PESO_VEICULOS = 100.0
+PESO_DISTANCIA = 1.0
+PATIENCE = 30
+
+Número de veículos: 20
+Distância total: 2960.5653
+Melhor encontrado na geração: 47 | tempo: 61.30s
+=========================================================

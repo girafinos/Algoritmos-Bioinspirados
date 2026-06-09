@@ -1,0 +1,59 @@
+POP_SIZE = 50
+ITERACOES = 150
+ALPHA = 1.0
+BETA = 4.0
+RHO = 0.5
+FEROMONIO_INICIAL = 0.001
+Q = 30.0
+SEMENTE = 1
+TAU_MIN = 1e-4
+TAU_MAX = 100.0
+PATIENCE = 70
+TEMPO_MAXIMO = 480.0  
+PESO_VEICULOS = 10.0
+PESO_DISTANCIA = 1.0
+
+Número de veículos: 3
+Distância total: 1179.5466
+Melhor encontrado na geração: 129 | tempo: 67.76s
+=========================================================
+
+POP_SIZE = 50
+ITERACOES = 150
+ALPHA = 1.0
+BETA = 4.0
+RHO = 0.6
+FEROMONIO_INICIAL = 0.001
+Q = 10.0
+SEMENTE = 1
+TAU_MIN = 1e-4
+TAU_MAX = 100.0
+PATIENCE = 70
+TEMPO_MAXIMO = 480.0  
+PESO_VEICULOS = 10.0
+PESO_DISTANCIA = 1.0
+
+Número de veículos: 3
+Distância total: 1215.4070
+Melhor encontrado na geração: 150 | tempo: 76.33s
+=========================================================
+POP_SIZE = 50
+ITERACOES = 150
+ALPHA = 1.5  
+BETA = 4.0
+RHO = 0.5
+FEROMONIO_INICIAL = 0.001
+Q = 30.0
+SEMENTE = 1
+TAU_MIN = 1e-4
+TAU_MAX = 100.0
+PATIENCE = 70
+TEMPO_MAXIMO = 480.0  
+PESO_VEICULOS = 50.0
+PESO_DISTANCIA = 1.0
+
+Número de veículos: 3
+Distância total: 1293.7648
+Melhor encontrado na geração: 145 | tempo: 76.64s
+=========================================================
+
