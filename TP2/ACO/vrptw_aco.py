@@ -17,9 +17,10 @@ from typing import Dict, List, Optional, Tuple
 POP_SIZE = 50
 ITERACOES = 150
 
-ALPHA = 2.0
-BETA = 3.0
-RHO = 0.6
+ALPHA = 1.0
+BETA = 4.0
+RHO = 0.5
+
 FEROMONIO_INICIAL = 0.001
 Q = 1.0
 SEMENTE = 1
@@ -30,7 +31,7 @@ TAU_MAX = 100.0
 PATIENCE = 70
 TEMPO_MAXIMO = 480.0  
 
-PESO_VEICULOS = 50.0
+PESO_VEICULOS = 70.0
 PESO_DISTANCIA = 1.0
 
 MELHOR_SOLUCAO: Optional[List[List[int]]] = None
@@ -42,7 +43,9 @@ ULTIMA_MELHORA = 0
 
 Cliente = Dict[str, float]
 
-CAMINHO_INSTANCIA = "/home/gabriel/Desktop/Faculdade/7periodo/BioInspirados/Algoritmos-Bioinspirados/TP2/Instancias_teste/rc2_4_9.txt"
+CAMINHO_INSTANCIA = "TP2/instâncias_teste/c1_2_1.txt"
+
+PASTA_SAIDA = "/home/gabriel/Área de trabalho/Faculdade/7periodo/BioInspirados/Algoritmos-Bioinspirados/TP2/ACO/resultados"
 
 # -------------------- Leitura de instância --------------------
 
@@ -321,9 +324,10 @@ def salvar_resultado_txt(
     td: float,
     geracao_melhor: int,
     tempo_melhor: float,
+    tempo_total: float,
 ) -> str:
     
-    pasta_saida = "TP2/resultados/resultados_aco"
+    pasta_saida = PASTA_SAIDA
     os.makedirs(pasta_saida, exist_ok=True) 
     caminho_saida = os.path.join(pasta_saida, f'{nome_instancia}_resultado.txt')
 
@@ -331,6 +335,7 @@ def salvar_resultado_txt(
         f'Nome da instância: {nome_instancia}',
         f'Melhor encontrado na geração: {geracao_melhor}',
         f'Tempo até melhor resultado: {tempo_melhor:.2f}s',
+        f'Tempo total de execução: {tempo_total:.2f}s',
         f'Número de veículos: {nv}',
         f'Distância total: {td:.4f}',
         'Rotas:',
@@ -346,12 +351,11 @@ def salvar_resultado_txt(
 
 
 random.seed(SEMENTE)
+inicio_total = time.time()
 nome_instancia, capacidade, clientes = ler_instancia(CAMINHO_INSTANCIA)
 dist = construir_matriz_distancias(clientes)
 n = len(clientes)
 feromonios = criar_matriz_feromonios(n)
-
-inicio_total = time.time()
 
 for geracao in range(1, ITERACOES + 1):
     tempo_atual = time.time() - inicio_total
@@ -422,6 +426,7 @@ caminho_saida = salvar_resultado_txt(
     MELHOR_DISTANCIA,
     MELHOR_GERACAO,
     MELHOR_TEMPO,
+    tempo_total,
 )
 
 print('\nMelhor solução global:')
