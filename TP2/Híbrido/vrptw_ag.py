@@ -497,6 +497,7 @@ def executar(clientes, capacidade, dist,
     melhor_rotas = None
     melhor_nv = melhor_td = float('inf')
     melhor_pontuacao = float('inf')
+    melhor_tempo_aparicao = None
 
     elite = []
     iteracao = 0
@@ -525,8 +526,10 @@ def executar(clientes, capacidade, dist,
             melhor_pontuacao = pont
             melhor_rotas = [rota[:] for rota in rotas]
             melhor_nv, melhor_td = nv, td
-            historico.append((iteracao, melhor_nv, melhor_td))
-            print(f"  Iter {iteracao:4d} | ★ Veículos: {melhor_nv} | Dist: {melhor_td:.4f} | {tempo_passado:.1f}s")
+            aparicao = time.time() - inicio
+            melhor_tempo_aparicao = aparicao
+            historico.append((iteracao, melhor_nv, melhor_td, aparicao))
+            print(f"  Iter {iteracao:4d} | ★ Veículos: {melhor_nv} | Dist: {melhor_td:.4f} | {tempo_passado:.1f}s | melhor em {aparicao:.1f}s")
         elif iteracao % 5 == 0:
             print(f"  Iter {iteracao:4d} | Veículos: {nv} | Dist: {td:.4f} | melhor={melhor_nv}/{melhor_td:.4f} | {tempo_passado:.1f}s")
 
@@ -540,13 +543,13 @@ def executar(clientes, capacidade, dist,
         if pontuacao(nv_f, td_f) <= melhor_pontuacao:
             melhor_rotas, melhor_nv, melhor_td = final, nv_f, td_f
 
-    return melhor_rotas, melhor_nv, melhor_td, time.time() - inicio, historico
+    return melhor_rotas, melhor_nv, melhor_td, time.time() - inicio, historico, melhor_tempo_aparicao
 
 # ─────────────────────────────────────────────────────────────────
 # 9. SAÍDA
 # ─────────────────────────────────────────────────────────────────
 
-def formatar_saida(nome_instancia, autores, algoritmo, rotas, nv, td, tempo_total):
+def formatar_saida(nome_instancia, autores, algoritmo, rotas, nv, td, tempo_total, tempo_ate_melhor=None):
     linhas = [
         f"======== MELHOR SOLUCAO {algoritmo} ========",
         f"Nome da instancia : {nome_instancia}",
@@ -554,8 +557,10 @@ def formatar_saida(nome_instancia, autores, algoritmo, rotas, nv, td, tempo_tota
         f"Numero de veiculos: {nv}",
         f"Distancia total: {td:.4f}",
         f"Tempo total: {tempo_total:.0f}s",
-        "Rotas:",
     ]
+    if tempo_ate_melhor is not None:
+        linhas.append(f"Tempo até melhor solução: {tempo_ate_melhor:.1f}s")
+    linhas.append("Rotas:")
     linhas += [f"Rota {i + 1}: {' -> '.join(map(str, rota))}" for i, rota in enumerate(rotas)]
     return "\n".join(linhas)
 
@@ -603,7 +608,7 @@ def main():
         # Adjust time limit to account for file reading and distance calculation
         limite_tempo_ajustado = max(10, TIME_LIMIT - tempo_preparo)
 
-        rotas, nv, td, tempo_total, historico = executar(
+        rotas, nv, td, tempo_total, historico, tempo_ate_melhor = executar(
             clientes, capacidade, dist,
             elite_size=ELITE_SIZE,
             frac_busca_local=LS_FRAC,
@@ -621,10 +626,13 @@ def main():
                        clientes, dist, historico, viavel)
         else:
             print(f"\n  Viável: {viavel}")
-            print(f"  Veículos: {nv} | Distância: {td:.4f} | Tempo: {tempo_total:.1f}s")
+            if tempo_ate_melhor is not None:
+                print(f"  Veículos: {nv} | Distância: {td:.4f} | Tempo: {tempo_total:.1f}s | Tempo até melhor: {tempo_ate_melhor:.1f}s")
+            else:
+                print(f"  Veículos: {nv} | Distância: {td:.4f} | Tempo: {tempo_total:.1f}s")
 
         saida_texto = formatar_saida(nome_instancia, AUTHORS, ALGORITHM_NAME,
-                                    rotas, nv, td, tempo_total)
+                        rotas, nv, td, tempo_total, tempo_ate_melhor)
         caminho_saida = salvar_saida(nome_instancia, ALGORITHM_NAME, saida_texto, OUTPUT_DIR)
         print(f"  Arquivo salvo: {caminho_saida}")
 
