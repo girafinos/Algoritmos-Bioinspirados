@@ -1,0 +1,20 @@
+Nome da instância: C101
+Melhor encontrado na geração: 33
+Tempo até melhor resultado: 73.54s
+Tempo total de execução: 335.83s
+Número de veículos: 13
+Distância total: 1836.0558
+Rotas:
+Rota 1: 13 18 19 15 16 14 6 99 75
+Rota 2: 90 87 86 74 46 61 64 51 21
+Rota 3: 98 96 94 92 84 85 100
+Rota 4: 32 33 31 35 37 38 39 59 50 47
+Rota 5: 42 41 27 10 11 28 26 22 1
+Rota 6: 57 55 54 44 72 68 66 69
+Rota 7: 43 65 63 53 56 58 60 34
+Rota 8: 81 78 76 71 70 73 77 79 80
+Rota 9: 17 7 29 30 88 4 91
+Rota 10: 5 3 95 83 93 97 89 2
+Rota 11: 8 9 12 52 49
+Rota 12: 20 24 25 40 45 48 23
+Rota 13: 67 62 82 36
