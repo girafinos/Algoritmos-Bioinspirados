@@ -1,0 +1,40 @@
+testes (c) - configuração ótima: 
+
+    (c101.txt)
+
+    TANTO FAZ KKKKKKK, TUDO CONVERGE.
+
+    (c1_2_1.txt)
+
+    SEED = 42
+    ELITE_SIZE =12
+    LS_FRAC = 0.50
+    N_REMOVE_PERTURB = 2
+    PRESERVE_RATE = 0.45
+    SHUFFLE_FACTOR_MIN = 0
+    SHUFFLE_FACTOR_MAX = 1.5
+    SEG_SIZES = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+testes (rc) - configuração quase ótima: 
+
+    (rc2_4_9.txt)
+
+    SEED = 42
+    ELITE_SIZE = 8
+    LS_FRAC = 0.55
+    N_REMOVE_PERTURB = 4
+    PRESERVE_RATE = 0.40
+    SHUFFLE_FACTOR_MIN = 0.0
+    SHUFFLE_FACTOR_MAX = 1.5
+    SEG_SIZES = (1, 2, 3)
+
+    (rc208.txt)
+
+    SEED = 42
+    ELITE_SIZE = 10
+    LS_FRAC = 0.55
+    N_REMOVE_PERTURB = 20
+    PRESERVE_RATE = 0.15
+    SHUFFLE_FACTOR_MIN = 0.0
+    SHUFFLE_FACTOR_MAX = 3
+    SEG_SIZES = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
